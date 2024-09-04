@@ -236,8 +236,6 @@ function getRectangleString(width, height) {
   return result;
 }
 
-// console.log(getRectangleString(6, 3));
-
 
 /**
  * Encode specified string with ROT13 cipher
@@ -255,8 +253,30 @@ function getRectangleString(width, height) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const firstArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'];
+  const secondArr = ['n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  function convert(char) {
+    let convertedChar;
+    if (firstArr.includes(char.toLowerCase())) {
+      convertedChar = secondArr[firstArr.indexOf(char.toLowerCase())];
+    } else if (secondArr.includes(char.toLowerCase())) {
+      convertedChar = firstArr[secondArr.indexOf(char.toLowerCase())];
+    } else {
+      convertedChar = char;
+    }
+
+    if (char === char.toUpperCase()) {
+      convertedChar = convertedChar.toUpperCase();
+    }
+    return convertedChar;
+  }
+
+  let result = '';
+  for (let i = 0; i < str.length; i += 1) {
+    result += convert(str[i]);
+  }
+  return result;
 }
 
 /**
@@ -272,37 +292,47 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  if (typeof value === 'string') {
+    return true;
+  }
+  if (value instanceof String) {
+    return true;
+  }
+  return false;
 }
 
-
 /**
- * Returns playid card id.
- *
- * Playing cards inittial deck inclides the cards in the following order:
- *
- *  'A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
- *  'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
- *  'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
- *  'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠'
- *
- * (see https://en.wikipedia.org/wiki/Standard_52-card_deck)
- * Function returns the zero-based index of specified card in the initial deck above.
- *
- * @param {string} value
- * @return {number}
- *
- * @example
- *   'A♣' => 0
- *   '2♣' => 1
- *   '3♣' => 2
- *     ...
- *   'Q♠' => 50
- *   'K♠' => 51
- */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+   * Returns playid card id.
+   *
+   * Playing cards inittial deck inclides the cards in the following order:
+   *
+   *  'A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
+   *  'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
+   *  'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
+   *  'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠'
+   *
+   * (see https://en.wikipedia.org/wiki/Standard_52-card_deck)
+   * Function returns the zero-based index of specified card in the initial deck above.
+   *
+   * @param {string} value
+   * @return {number}
+   *
+   * @example
+   *   'A♣' => 0
+   *   '2♣' => 1
+   *   '3♣' => 2
+   *     ...
+   *   'Q♠' => 50
+   *   'K♠' => 51
+   */
+function getCardId(value) {
+  const coloda = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+
+  return coloda.indexOf(value);
 }
 
 
