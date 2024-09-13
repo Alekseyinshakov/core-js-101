@@ -27,8 +27,17 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  if (num % 3 === 0 && num % 5 === 0) {
+    return 'FizzBuzz';
+  }
+  if (num % 3 === 0) {
+    return 'Fizz';
+  }
+  if (num % 5 === 0) {
+    return 'Buzz';
+  }
+  return num;
 }
 
 
@@ -43,8 +52,18 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  if (n === 1) {
+    return 1;
+  }
+  let result = 0;
+  for (let i = 1; i <= n; i += 1) {
+    if (result === 0) {
+      result += i;
+    }
+    result *= i;
+  }
+  return result;
 }
 
 
@@ -60,8 +79,12 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  let result = 0;
+  for (let i = n1; i <= n2; i += 1) {
+    result += i;
+  }
+  return result;
 }
 
 
@@ -80,8 +103,13 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  const maxBorder = Math.max(...[a, b, c]);
+  const sumOfAnothers = a + b + c - maxBorder;
+  if (maxBorder >= sumOfAnothers) {
+    return false;
+  }
+  return true;
 }
 
 
@@ -117,8 +145,27 @@ function isTriangle(/* a, b, c */) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const x1 = rect1.top;
+  const y1 = rect1.left;
+  const w1 = rect1.width;
+  const h1 = rect1.height;
+
+  const x2 = rect2.top;
+  const y2 = rect2.left;
+  const w2 = rect2.width;
+  const h2 = rect2.height;
+
+  const right1 = x1 + w1;
+  const bottom1 = y1 + h1;
+
+  const right2 = x2 + w2;
+  const bottom2 = y2 + h2;
+
+  if (right1 <= x2 || right2 <= x1 || y2 >= bottom1 || y1 >= bottom2) {
+    return false;
+  }
+  return true;
 }
 
 
@@ -148,8 +195,11 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(c, p) {
+  if ((p.x - c.center.x) ** 2 + (p.y - c.center.y) ** 2 < c.radius ** 2) {
+    return true;
+  }
+  return false;
 }
 
 
