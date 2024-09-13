@@ -253,8 +253,12 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const firstBracket = isStartIncluded ? '[' : '(';
+  const firstDigit = Math.min(a, b);
+  const secondDigit = Math.max(a, b);
+  const lastBracket = isEndIncluded ? ']' : ')';
+  return `${firstBracket}${firstDigit}, ${secondDigit}${lastBracket}`;
 }
 
 
@@ -395,8 +399,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -412,8 +416,39 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let sameChank = '';
+  const anyPath = pathes[0];
+
+  for (let i = 0; i < anyPath.length; i += 1) {
+    const letter = anyPath[i];
+    let isSame = false;
+    for (let index = 0; index < pathes.length; index += 1) {
+      if (pathes[index][i] === letter) {
+        isSame = true;
+      } else {
+        isSame = false;
+        break;
+      }
+    }
+    if (isSame) {
+      sameChank += letter;
+    } else {
+      break;
+    }
+  }
+
+  const cutArr = sameChank.split('/');
+  cutArr.pop();
+  const result = `${cutArr.join('/')}/`;
+
+  if (result === '//') {
+    return '/';
+  }
+  if (sameChank === '') {
+    return '';
+  }
+  return result;
 }
 
 
